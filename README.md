@@ -121,6 +121,8 @@ This is an example of how to list things you need to use the software and how to
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
+Spindle is perfect for businesses looking to create an API for their database, without the hassle and repitition of manually defining endpoints. Simply input a natural language query for what functionalities you'd like your API to have, as well as your database's URI, and your API is ready to ship.
+
 _For more examples, please refer to the [Documentation](https://example.com)_
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -130,10 +132,9 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
+- [ ] API Hosting
+- [ ] Support for additional databases
+    - [ ] Both SQL and NoSQL
 
 See the [open issues](https://github.com/jacksonbelanger/spindle/issues) for a full list of proposed features (and known issues).
 
@@ -171,7 +172,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Contact us at team@spindle.com
 
 Project Link: [https://github.com/jacksonbelanger/spindle](https://github.com/jacksonbelanger/spindle)
 
@@ -182,7 +183,7 @@ Project Link: [https://github.com/jacksonbelanger/spindle](https://github.com/ja
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* []() Hacklytics 2024 Organizers & Judges
+* []() Hacklytics Organizers & Judges
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
