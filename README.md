@@ -15,7 +15,7 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">Spindle</h3>
+<h2 align="center">Spindle</h2>
 
   <p align="center">
     API generation and hosting for your database.
