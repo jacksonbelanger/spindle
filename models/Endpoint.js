@@ -14,7 +14,8 @@ const EndpointSchema = new Schema({
         }],
         code: {
             type: String
-        }
+        },
+      
    
 });
 
