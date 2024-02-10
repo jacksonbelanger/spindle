@@ -50,7 +50,7 @@ const extractionFunctionSchema = {
 };
 
 // Instantiate the ChatOpenAI class
-const model = new ChatOpenAI({ modelName: "gpt-4", maxTokens:2500, temperature:1.07});
+const model = new ChatOpenAI({ modelName: "gpt-3.5-turbo-0125", maxTokens:2500, temperature:1.07});
 
 // Create a new runnable, bind the function to the model, and pipe the output through the parser
 const runnable = model
@@ -76,6 +76,7 @@ const result = await runnable.invoke([
 return result
 
     } catch(e){
+        console.log("error hit")
         return null;
     }
 
@@ -83,10 +84,13 @@ return result
 
 async function createEndpoints(endpoints, schema){
     const returnArr = []
+
     for(let endpoint of endpoints){
-        let new_endpoint = await createEndpoints(endpoint, schema)
-        if(new_endpoint)
+        console.log('done in create endpoints')
+        let new_endpoint = await createEndpoint(endpoint, schema)
+        if(new_endpoint){
             returnArr.push(new_endpoint)
+        }
     }
 
     return returnArr

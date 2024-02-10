@@ -8,7 +8,6 @@ dotenv.config()
 // Instantiate the parser
 const parser = new JsonOutputFunctionsParser();
 
-const completed_endpoints = []
 
 // Define the function schema
 const doc_endpointSchema = {
@@ -64,7 +63,7 @@ const doc_endpointSchema = {
 };
 
 // Instantiate the ChatOpenAI class
-const model = new ChatOpenAI({ modelName: "gpt-4", maxTokens:2000});
+const model = new ChatOpenAI({ modelName: "gpt-3.5-turbo-0125", maxTokens:3000});
 
 // Create a new runnable, bind the function to the model, and pipe the output through the parser
 const runnable = model
@@ -89,6 +88,7 @@ const result = await runnable.invoke([
 return result;
 
     } catch(e){
+      console.log(e)
         return null;
     }
 
@@ -99,9 +99,11 @@ return result;
 async function createDocEndPoints(endpoints, schema){
     let returnArr =[]
     for(let endpoint of endpoints){
+      console.log('done in create doc endpoints')
         let new_endpoint = await createDocEndpoint(endpoint, schema)
         if(new_endpoint){
             returnArr.push(new_endpoint)
+            console.log("pushed")
         }
     }
 

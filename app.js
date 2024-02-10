@@ -5,9 +5,14 @@ const openAIRouter = require("./openai.js");
 const mongouri = require("./mongouri.js");
 const dotenv = require('dotenv')
 
+
+
 dotenv.config();
 
 // receive hashed mongo URI 
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use('/mongoDB', mongouri)
 
