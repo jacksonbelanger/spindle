@@ -9,16 +9,19 @@ dotenv.config()
 const parser = new JsonOutputFunctionsParser();
 
 
+const gpt_model = process.env.GPT_MODEL
+
+
 // Define the function schema
-const doc_endpointSchema = {
+const extractionFunctionSchema = {
   name: "docendpointcreator",
-  description: "Creates Documentation for POST API Endpoint Functionality From API Idea and Mongo Schema",
+  description: "Creates documentation object for API Endpoint from given API specification. This includes the API endpoint, Mongo code, and parameters.",
   parameters: {
     type: "object",
     properties: {
         name: {
             type: "string",
-            description: "Name of the endpoints."
+            description: "Name of the endpoint."
         },
         api_description: {
             type: "string",
@@ -63,24 +66,25 @@ const doc_endpointSchema = {
 };
 
 // Instantiate the ChatOpenAI class
-const model = new ChatOpenAI({ modelName: "gpt-3.5-turbo-0125", maxTokens:3000});
+const model = new ChatOpenAI({ modelName: gpt_model, maxTokens:3000});
 
 // Create a new runnable, bind the function to the model, and pipe the output through the parser
 const runnable = model
   .bind({
-    functions: [doc_endpointSchema],
+    functions: [extractionFunctionSchema],
     function_call: { name: "docendpointcreator" },
   })
   .pipe(parser);
 
 
-async function createDocEndpoint(endpoint, schema){
+async function createDocEndpoint(endpoint){
     try{
 const result = await runnable.invoke([
-  new HumanMessage(`Create an documentation for the endpoints from this API idea : 
-  ${endpoint}
-    This is the schema: 
-    ${schema}
+  new HumanMessage(`Create a documentation object for the endpoint from this API with this specification: 
+  This is the endpoint ${endpoint.endpoint}.
+  These are the parameters ${endpoint.params}.
+  These are the parameters ${endpoint.code}.
+  
     `)
 ]
 );
@@ -96,11 +100,12 @@ return result;
 
 
 
-async function createDocEndPoints(endpoints, schema){
+async function createDocEndPoints(endpoints){
     let returnArr =[]
     for(let endpoint of endpoints){
+      console.log(endpoint)
       console.log('done in create doc endpoints')
-        let new_endpoint = await createDocEndpoint(endpoint, schema)
+        let new_endpoint = await createDocEndpoint(endpoint)
         if(new_endpoint){
             returnArr.push(new_endpoint)
             console.log("pushed")

@@ -5,15 +5,17 @@ const dotenv= require('dotenv')
 
 dotenv.config()
 
+const gpt_model = process.env.GPT_MODEL
+
+
 // Instantiate the parser
 const parser = new JsonOutputFunctionsParser();
 
-const completed_endpoints = []
 
 // Define the function schema
 const extractionFunctionSchema = {
   name: "endpointcreator",
-  description: "Creates POST API Endpoint Functionality From API Idea and Mongo Schema",
+  description: "Creates API Endpoint Functionality From API Idea and Mongo Schema. Can only create POST APIs that read from the database. It cannot create APIs that write to the database.",
   parameters: {
     type: "object",
     properties: {
@@ -50,7 +52,7 @@ const extractionFunctionSchema = {
 };
 
 // Instantiate the ChatOpenAI class
-const model = new ChatOpenAI({ modelName: "gpt-3.5-turbo-0125", maxTokens:2500, temperature:1.07});
+const model = new ChatOpenAI({ modelName: gpt_model, maxTokens:2500, temperature:1.07});
 
 // Create a new runnable, bind the function to the model, and pipe the output through the parser
 const runnable = model

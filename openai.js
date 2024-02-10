@@ -32,6 +32,7 @@ router.use(express.json());
  * Returns JSON for an endpoint
  */
 router.post('/generateAPI', async (req, res) => {
+     try {
     console.log("generateAPI endpoint has been hit");
     console.log(req.body)
     const query = req.body.query;
@@ -57,11 +58,8 @@ router.post('/generateAPI', async (req, res) => {
     }
 
     let endpoint_ideas = await getAPIIdeas(schema, query);
-    console.log("this is the endpoints")
-    console.log(endpoint_ideas)
     let endpoints = await createEndPoints(endpoint_ideas, schema);
-    console.log(endpoints)
-    let doc_endpoints = await createDocumentation(endpoints, schema);
+    let doc_endpoints = await createDocumentation(endpoints);
 
     await mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -88,18 +86,15 @@ router.post('/generateAPI', async (req, res) => {
 
     for(let doc_endpoint of doc_endpoints){
 
-        let new_doc_endpoint = {
+    let new_doc_endpoint = {
     endpoint_ref: endpoint_ids[counter],
     name:doc_endpoint.name,
     description: doc_endpoint.api_description,
     params: doc_endpoint.params
-        
-        }
+    }
 
         let id = await DocEndpoint.create(new_doc_endpoint)
-
         doc_endpoint_ids.push(id)
-
         counter++;
 
     }
@@ -114,14 +109,7 @@ router.post('/generateAPI', async (req, res) => {
     }
 
 
-    const image_url = await image_query("Create a cool, electronic, futuristic image that has to do with" + name)
-
-    
-
-
-
-
-
+    const image_url = await image_query("Create an image that has to do with" + name)
 
 
     const newDocumentation = {
@@ -138,33 +126,6 @@ router.post('/generateAPI', async (req, res) => {
 
     res.status(200).send({ success: 'API Created' })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //upload each doc end point to mongo and save refs to array
-
-    //create api model
-    //create documentation model
-
-
-
-
-   
-
-
-    // Generates endpoints from submitted schema
-    try {
-       
     } catch (error) {
         console.error('Error calling OpenAI API:', error);
         res.status(500).send({ error: 'Error processing your request' });
