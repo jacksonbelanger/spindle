@@ -1,5 +1,6 @@
 require('dotenv').config();
 const aws = require('aws-sdk');
+const randomstring = require("randomstring");
 
 const aws_secret_key = process.env.AWS_SECRET_KEY;
 const aws_access_key = process.env.AWS_ACCESS_KEY;
@@ -35,10 +36,14 @@ const s3 = new aws.S3({
         region: 'us-east-1'
     }
 });
+
+//create random key
+
+
    
 let params = {
             Bucket: 'spindle-gt',
-            Key: 'myKeyfasdf.jpg',
+            Key: randomstring.generate()+'.png',
             Body: Buffer.from(result_buffer)
         };
         let image_response = await s3.upload(params).promise();
@@ -53,5 +58,5 @@ let params = {
 }
 
 
-query("Create an image of an alpaca")
+console.log(query("Create an image of an alpaca"))
 
