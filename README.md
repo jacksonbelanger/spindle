@@ -20,7 +20,7 @@
   <p align="center">
     API generation and hosting for your database.
     <br />
-    <a href="https://github.com/jacksonbelanger/spindle"><strong>Explore the docs »</strong></a>
+    <!-- <a href="https://github.com/jacksonbelanger/spindle"><strong>Explore the docs »</strong></a> -->
     <br />
     <br />
     <a href="https://github.com/jacksonbelanger/spindle">View Demo</a>
