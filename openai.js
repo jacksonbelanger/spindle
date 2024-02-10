@@ -36,8 +36,9 @@ router.post('/generateAPI', async (req, res) => {
     ‘code”:”output code”
     }
 
-    Could you not give me text between JSON files? Don't me comments between each functionality.`;
+    Could you not give me text between JSON files? Don't me comments between each functionality.` + "\n" + schema;
 
+    // Generates endpoints from submitted schema
     try {
         const gptResponse = await openai.chat.completions.create({
             messages: [{ role: 'user', content: prompt }],
@@ -52,6 +53,26 @@ router.post('/generateAPI', async (req, res) => {
         console.error('Error calling OpenAI API:', error);
         res.status(500).send({ error: 'Error processing your request' });
     }
+
+    // Generate additional functionality based on custom query 
+    // not finished
+    try {
+        const gptResponse = await openai.chat.completions.create({
+            messages: [{role: 'user', content: query}],
+            model: 'gpt-4',
+            max_tokens: 4096,
+            temperature: 0.7
+        }) 
+    } catch (error) {
+        console.error('Error calling OpenAI API: ', error);
+        res.status(500).send({ error: 'Error processing your request' });
+    }
+    
+    // doc_endpoint not finished
+    const prompt_doc = "For each endpoint, generate a one-to-one JSON file to a documentation representation using a list. The documentation needs: id, name, endpoint, description, and params";
+    
+    // documentation 
+    const markdown_doc = "Generate a markdown file of the doc_endpoints in the format: __id, tags, params, endpoint, description.";
 });
 
 module.exports = router;

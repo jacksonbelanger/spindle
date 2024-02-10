@@ -13,6 +13,6 @@ app.use('/mongoDB', mongouri)
 app.use('/openai', openAIRouter)
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`Server is starting on port:  ${port}`)
 })
 
