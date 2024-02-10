@@ -182,9 +182,7 @@ Project Link: [https://github.com/jacksonbelanger/spindle](https://github.com/ja
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* []()
-* []()
-* []()
+* [](Hacklytics 2024 Organizers & Judges)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
