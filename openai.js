@@ -111,6 +111,15 @@ router.post('/generateAPI', async (req, res) => {
         query:query,
         endpoints:endpoint_ids
     }
+
+    
+
+
+
+
+
+
+
     const newDocumentation = {
         name: name,
         api: newAPI._id,
