@@ -4,6 +4,7 @@ const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 const getAPIIdeas = require("./getIdeas.js");
 const createEndPoints = require("./createEndpoints.js");
 const createDocumentation = require("./createDocumentation.js");
+const image_query = require("./getImage.js");
 
 const Endpoint = require("./models/Endpoint.js")
 const DocEndpoint = require("./models/DocEndpoint.js")
@@ -112,6 +113,9 @@ router.post('/generateAPI', async (req, res) => {
         endpoints:endpoint_ids
     }
 
+
+    const image_url = await image_query("Create a cool, electronic, futuristic image that has to do with" + name)
+
     
 
 
@@ -126,7 +130,7 @@ router.post('/generateAPI', async (req, res) => {
         company: company,
         doc_endpoints: doc_endpoint_ids,
         description: "", 
-        image: ''
+        image: image_url
     }
 
     let api_status = await API.create(newAPI)

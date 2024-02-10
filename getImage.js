@@ -7,7 +7,7 @@ const aws_access_key = process.env.AWS_ACCESS_KEY;
 
 
 
-async function query(input) {
+async function image_query(input) {
 
     const response = await fetch(
     "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0",
@@ -58,5 +58,5 @@ let params = {
 }
 
 
-console.log(query("Create an image of an alpaca"))
+module.exports = image_query;
 
