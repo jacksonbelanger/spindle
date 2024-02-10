@@ -3,6 +3,7 @@ const app = express()
 const port = 3001
 const openAIRouter = require("./openai.js");
 const mongouri = require("./mongouri.js");
+const dotenv = require('dotenv')
 
 dotenv.config();
 

@@ -18,7 +18,10 @@ router.post('/generateAPI', async (req, res) => {
     console.log("generateAPI endpoint has been hit");
     const query = req.body.query;
     const schema = req.body.schema;
-
+    const mongo_uri = req.body.mongo_uri
+    const company = req.body.company
+    const name = req.body.name
+    
     if (!query) {
         return res.status(400).send({ error: 'No query provided' });
     }
@@ -36,7 +39,9 @@ router.post('/generateAPI', async (req, res) => {
     ‘code”:”output code”
     }
 
-    Could you not give me text between JSON files? Don't me comments between each functionality.` + "\n" + schema;
+    Could you not give me text between JSON files? Don't comment between each functionality.` + "\n" + schema;
+
+    let response = null
 
     // Generates endpoints from submitted schema
     try {
@@ -48,7 +53,7 @@ router.post('/generateAPI', async (req, res) => {
 
           console.log(gptResponse.choices[0].message.content)
 
-        res.send(gptResponse.choices[0].message.content);
+        response = gptResponse.choices[0].message.content;
     } catch (error) {
         console.error('Error calling OpenAI API:', error);
         res.status(500).send({ error: 'Error processing your request' });
