@@ -1,5 +1,8 @@
 require('dotenv').config();
+const aws = require('aws-sdk');
 
+const aws_secret_key = process.env.AWS_SECRET_KEY;
+const aws_access_key = process.env.AWS_ACCESS_KEY;
 
 
 
@@ -16,27 +19,31 @@ async function query(input) {
 
 
     const result_buffer = await response.arrayBuffer()
+
+    aws.config.update({
+    secretAccessKey: aws_secret_key,
+    accessKeyId: aws_access_key,
+    signatureVersion: 'v4',
+    region: 'us-east-1'
+
+});
+
+const s3 = new aws.S3({
+    params: {
+        Bucket: 'spindle-gt',
+        signatureVersion: 'v4',
+        region: 'us-east-1'
+    }
+});
    
+let params = {
+            Bucket: 'spindle-gt',
+            Key: 'myKeyfasdf.jpg',
+            Body: Buffer.from(result_buffer)
+        };
+        let image_response = await s3.upload(params).promise();
 
-
-    const response_upload = await fetch(
-        "https://api.imgbb.com/1/upload",
-        {
-            headers: {},
-            method: "POST",
-            body: JSON.stringify({
-                key: process.env.IMG,
-                image:result_buffer
-
-            })
-        }
-
-    );
-
-    console.log(response_upload)
-
-    const image_destination = response_upload.data.url;
-    console.log(image_destination)
+        let image_destination = image_response.Location;
 
 
    
