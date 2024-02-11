@@ -12,7 +12,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/jacksonbelanger/spindle">
-    <img src="logo.jpeg" alt="Logo" width="80" height="80">
+    <img src="logo.jpeg" alt="Logo" width="140" height="140">
   </a>
 
 <h2 align="center">Spindle</h2>
