@@ -5,6 +5,7 @@ const getAPIIdeas = require("./getIdeas.js");
 const createEndPoints = require("./createEndpoints.js");
 const createDocumentation = require("./createDocumentation.js");
 const image_query = require("./getImage.js");
+const Company = require("./models/Company.js")
 
 const Endpoint = require("./models/Endpoint.js")
 const DocEndpoint = require("./models/DocEndpoint.js")
@@ -12,6 +13,9 @@ const API = require("./models/API.js")
 const Documentation = require("./models/Documentation.js")
 
 
+function formatString(input) {
+    return input.toLowerCase().replace(/\s/g, '_');
+}
 
 
 const mongoose = require('mongoose');
@@ -38,22 +42,28 @@ router.post('/generateAPI', async (req, res) => {
     const query = req.body.query;
     const schema = req.body.schema;
     const mongo_uri = req.body.mongo_uri
-    const company = req.body.company
+    const company_name = req.body.company_name
     const name = req.body.name
+
     
     if (!query) {
+        console.log("No query provided")
         return res.status(400).send({ error: 'No query provided' });
     }
     if (!schema) {
+        console.log("No schema provided")
         return res.status(400).send({ error: 'No schema provided' });
     }
     if (!mongo_uri) {
+        console.log("No mongo uri provided")
         return res.status(400).send({ error: 'No mongo uri provided' });
     }
-    if (!company) {
+    if (!company_name) {
+        console.log("No company provided")
         return res.status(400).send({ error: 'No company provided' });
     }
     if (!name) {
+        console.log("No name provided")
         return res.status(400).send({ error: 'No name provided' });
     }
 
@@ -70,11 +80,18 @@ router.post('/generateAPI', async (req, res) => {
         let new_endpoint = {
             endpoint:endpoint.endpoint,
             params:endpoint.params,
-            code: endpoint.code
+            code: endpoint.code,
+            name: formatString(name)
         }
 
         let id = await Endpoint.create(new_endpoint)
         endpoint_ids.push(id)
+    }
+
+    let company = await Company.findOne({name:company_name})
+    if(!company){
+        console.log("Company not found")
+        throw new Error("Company not found")
     }
 
 
@@ -124,7 +141,7 @@ router.post('/generateAPI', async (req, res) => {
     let api_status = await API.create(newAPI)
     let documentation_status = await Documentation.create(newDocumentation)
 
-    res.status(200).send({ success: 'API Created' })
+    res.status(200).send({ success: `API created sucessfully`, id: documentation_status._id });
 
     } catch (error) {
         console.error('Error calling OpenAI API:', error);

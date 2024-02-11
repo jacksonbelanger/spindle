@@ -15,6 +15,9 @@ const EndpointSchema = new Schema({
         code: {
             type: String
         },
+        name: {
+            type: String
+        }
       
    
 });

@@ -25,7 +25,7 @@ const extractionFunctionSchema = {
       },
       code: {
         type: "string",
-        description: "The NodeJS code for the inner logic of the API. This only includes the Mongo queries, not the express wrapper. You cannot use the response or requests objects. Refer to parameters as their variable names. The final output is saved as the variable called answer. Emit all control characters.",
+        description: "The NodeJS code for the inner logic of the API. This only includes the Mongoose Query, you can assume the Express wrapper is already made. You cannot use the response or requests objects. Refer to parameters as their variable names. The final output is saved as the variable called answer, which already exists. Emit all control characters.",
       },
       params:{
         type:"array",

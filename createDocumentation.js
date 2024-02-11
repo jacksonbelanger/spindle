@@ -21,21 +21,21 @@ const extractionFunctionSchema = {
     properties: {
         name: {
             type: "string",
-            description: "Name of the endpoint."
+            description: "Name of the endpoint such as Get Weather."
         },
         api_description: {
             type: "string",
-            description: "This should be a detailed description of the functions of the API."
+            description: "This should be a high level description of the functions of the API."
         },
       endpoint: {
         type: "string",
-        description: "The API endpoint path",
+        description: "The API endpoint path, such as api/get/weather",
       },
       tags: {
         type: "array",
         items: {
             type: "string",
-            description:"Tags that describe the endpoint."
+            description:"One word tags that describe the endpoint, such as weather."
             
         }
       },
@@ -46,11 +46,11 @@ const extractionFunctionSchema = {
             properties :{
                 name: {
                     type:"string",
-                    description:"name of the parameter"
+                    description:"Name of the parameter, such as location"
                 },
                 type:{
                     type:"string",
-                    description:"type of the parameter"
+                    description:"Javascript of the parameter, such as string"
                 }, 
                 description: {
                     type:"string",
@@ -82,7 +82,7 @@ async function createDocEndpoint(endpoint){
 const result = await runnable.invoke([
   new HumanMessage(`Create a documentation object for the endpoint from this API with this specification: 
   This is the endpoint ${endpoint.endpoint}.
-  These are the parameters ${endpoint.params}.
+  These are the parameters ${endpoint.params.toString()}.
   These are the parameters ${endpoint.code}.
   
     `)
