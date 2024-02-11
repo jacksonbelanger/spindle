@@ -18,7 +18,7 @@
 <h2 align="center">Spindle</h2>
 
   <p align="center">
-    API generation and hosting for your database.
+    Automatic API generation and hosting for your database.
     <br />
     <!-- <a href="https://github.com/jacksonbelanger/spindle"><strong>Explore the docs »</strong></a>
     <br />
