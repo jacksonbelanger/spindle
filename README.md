@@ -12,7 +12,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/jacksonbelanger/spindle">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="logo.jpeg" alt="Logo" width="80" height="80">
   </a>
 
 <h2 align="center">Spindle</h2>
@@ -183,7 +183,7 @@ Project Link: [https://github.com/jacksonbelanger/spindle](https://github.com/ja
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* []() Hacklytics Organizers & Judges
+* []() Thank you to DSGT for putting on this event
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
