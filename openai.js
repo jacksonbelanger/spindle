@@ -117,7 +117,7 @@ router.post('/generateAPI', async (req, res) => {
     }
 
     const newAPI = {
-        name: name,
+        name: formatString(name),
         company:company,
         mongo_uri:mongo_uri,
         mongo_schema:schema,

@@ -15,7 +15,7 @@ const parser = new JsonOutputFunctionsParser();
 // Define the function schema
 const extractionFunctionSchema = {
   name: "endpointcreator",
-  description: "Creates API Endpoint Functionality From API Idea and Mongo Schema. Can only create POST APIs that read from the database. It cannot create APIs that write to the database.",
+  description: "Creates API Endpoint Functionality From API Idea and Mongoose Schema. Can only create POST APIs that read from the database. It cannot create APIs that write to the database.",
   parameters: {
     type: "object",
     properties: {
@@ -25,7 +25,7 @@ const extractionFunctionSchema = {
       },
       code: {
         type: "string",
-        description: "The NodeJS code for the inner logic of the API. This only includes the Mongoose Query, you can assume the Express wrapper is already made. You cannot use the response or requests objects. Refer to parameters as their variable names. The final output is saved as the variable called answer, which already exists. Emit all control characters.",
+        description: "The NodeJS code for the inner logic of the API. This only includes the Mongoose Query, you can assume the Express wrapper is already made. You cannot use the response or requests objects. Refer to parameters as part of the params JSON. The final output is saved as the variable called answer, which already exists, so don't redeclare. You may assume the code will be inside of an async function, so you can use the await keyword. Refer to the Mongoose model as Model.",
       },
       params:{
         type:"array",
