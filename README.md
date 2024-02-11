@@ -181,7 +181,8 @@ Project Link: [https://github.com/jacksonbelanger/spindle](https://github.com/ja
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* []() Thank you to DSGT for putting on this event
+* []() Hacklytics staff & judges
+* []() Data Science @ GT
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
